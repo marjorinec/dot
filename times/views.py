@@ -11,7 +11,7 @@ def home(request):
     return render(request, 'times/home.html', {})
 
 def esportes3(request):
-    gl = gitlab.Gitlab('http://gitlab.globoi.com', 'ezPYwmrp3eAsiYm5x9Aj')
+    gl = gitlab.Gitlab('http://gitlab.com', 'cHCit8sbsWE1DjmkKetz')
     gl.auth()
 
     groups = gl.groups.list()
