@@ -1,4 +1,13 @@
 <html>
     <h1>Lista de times</h1>
-    <a href="http://127.0.0.1:8000/times/esportes3">Esportes3</a>
+
+    <ul>
+        {% for time in times %}
+        <li><a href="/{{ time.nome }}/">{{ time.nome }}</a></li>
+        {% endfor %}
+
+    </ul>
+
+
+
 </html>
