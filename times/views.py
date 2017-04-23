@@ -7,6 +7,7 @@ from django.shortcuts import get_object_or_404
 from times.models import Time
 
 import gitlab
+import pprint as pp
 
 from django.shortcuts import render
 
@@ -27,20 +28,34 @@ class TimeView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(TimeView, self).get_context_data(**kwargs)
+        
+        
         time_slug = kwargs['time_slug']
-        context['time'] = get_object_or_404(Time, nome=time_slug)
-
-        return context
-
-    def outro_get_context_data(self, **kwargs):
-        context = super(TimeView, self).outro_get_context_data(**kwargs)
-
-        #context['time_gitlab_api'] = {'nome': 'esportes3', 'email': ''}
-
-        gl = gitlab.Gitlab('http://gitlab.globoi.com', 'ezPYwmrp3eAsiYm5x9Aj')
+        
+        team = get_object_or_404(Time, nome=time_slug)
+    
+        team.skills = ['lavar', 'passar', 'tretar', 'dançar', 'neymar']
+        context['time'] = team
+        
+        # http://pythonbunny-memuller.c9users.io/hdjksahjdksahjkdadhsadhjkasdjkasd/
+        # http://pythonbunny-memuller.c9users.io/Teste/
+        # http://python-gitlab.readthedocs.io/en/stable/api-usage.html
+        
+        gl = gitlab.Gitlab('http://gitlab.com', 'cHCit8sbsWE1DjmkKetz')
         gl.auth()
 
-        groups = gl.groups.list()
-        context['time_gitlab_api'] = groups
-
+        group = gl.groups.get('203463')
+        member = group.members.list()
+        project = group.projects.list()
+        #milestones = project.milestones.list()
+        context['gitlab_group_info'] = group
+        context['gitlab_members'] = member
+        context['gitlab_projects'] = project#
+        # https://docs.gitlab.com/ee/api/groups.html#details-of-a-group
+        
+        # login: memuller ; senha: S1ndeL%1988
+        
+        
+        
         return context
+

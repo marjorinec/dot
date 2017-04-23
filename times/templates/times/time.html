@@ -1,4 +1,143 @@
-<h1>oi</h1>
+
+{% load bootstrap3 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+<style type="text/css">
+    body {
+        background-color: rgba(64, 64, 64, 0.1);
+    }
+    #sidebar {
+        height: 96%;
+        background-color: white;
+        padding: 0 0 0 0;
+        min-height: 700px;
+    }
+    
+    .info {
+        text-align: center;
+    }
+    
+    .avamembros {
+        border-radius: 50%;
+        height: 40px;
+        width: 40px;
+    }
+    
+    .avagrupo {
+        width: 90%;
+        max-width: 200px;
+    }
+    
+    .btn-email {
+        background-color: #7bbb5e;
+        color: white;
+    }
+    
+    h2 {
+        margin-top: 20px;
+        font-size: 20px;
+    }
+    
+    .row.content {
+        margin-top: 2%;
+        height:100%;
+        margin-bottom: 2%;
+    }
+    
+    .btn-skill {
+        margin-right: 5px;
+        margin-left: 5px;
+        margin-top: 8px;
+        background-color: rgb(220,220,220);
+    }
+    
+    button a {
+        color: white !important;
+    }
+    
+    #sidebar section {
+        padding-right: 15px;
+        padding-left: 15px;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 10px;
+        
+        
+    }
+    
+    #sidebar section:first-of-type {
+        border-top: 1px solid #eee;
+        margin-top: 10px;
+    }
+    
+    #projects li span {
+        width: 48%;
+        display: inline-block;
+    }
+    
+    #projects li span.buttons {
+        text-align: right;
+    }
+</style>
 
 
-{{ time.nome }}
+
+<section class="row content">
+    <div id='sidebar' class='col-md-offset-1 col-md-2 panel'>
+        
+        <div class="info">
+            <img class = "avagrupo" src="{{ gitlab_group_info.avatar_url }}"/>
+            <h1>{{ time.nome }}</h1>
+            <button class="btn btn-email" href="{{ time.email }}">
+                Contato
+            </button>
+            <p>{{ gitlab_groups_info.name }}</p>
+        </div>
+        
+        <section id="members">
+            <h2>Membros</h2>
+            {% for member in gitlab_members %}
+                <img class = "avamembros" src="{{ member.avatar_url}}" />
+            {% endfor %}
+        </section>
+        
+        <section id="skills">
+            <h2>Habilidades</h2>
+            <p>
+                {% for skill in time.skills %}
+                    <button class="btn btn-skill">{{skill}}</button>
+                {% endfor %}
+            </p>
+        </section>
+        
+        <section id="elsewhere">
+            <h2>Por aí</h2>
+            <p>
+                <img class = "avamembros" src="http://www.freeiconspng.com/uploads/github-logo-icon-30.png"/> 
+                <a href="http://www.github.com">GitGud</a>
+            </p>
+        </section>
+        
+        
+    </div>
+    <section id='content' class='col-md-8'>
+        <ul id='projects' class='list-group'>
+            {% for project in gitlab_projects %}
+                <li class='list-group-item'>
+                    <span class="">
+                        {{ project.name }}
+                    </span>
+                    <span class='buttons'>
+                        <button class="btn btn-primary"><a href="{{ project.web_url }}">Repositório</a></button>
+                        <button class="btn btn-warning"><a href="github-windows://{{ project.ssh_url_to_repo }}">Clonar</a></button>
+                        
+                        <button class="btn btn-danger">Tickets ({{project.open_issues_count}})</button>
+                    </span>
+                </li>
+            {% endfor %}
+        </ul>
+        
+        <h1>Milestones</h1>
+        {{ milestones }}
+    </section>
+</section>
