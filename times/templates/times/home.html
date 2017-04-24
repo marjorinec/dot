@@ -1,13 +1,16 @@
-<html>
+{% load bootstrap3 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+<div class='container'>
     <h1>Lista de times</h1>
 
-    <ul>
+    <ul class='list-group'>
         {% for time in times %}
-        <li><a href="/{{ time.nome }}/">{{ time.nome }}</a></li>
+            <li class='list-group-item'>
+                <a href="/{{ time.nome }}/">{{ time.nome }}</a>
+            </li>
         {% endfor %}
 
     </ul>
-
-
-
-</html>
+</div>

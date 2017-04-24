@@ -11,7 +11,7 @@
         height: 96%;
         background-color: white;
         padding: 0 0 0 0;
-        min-height: 700px;
+        min-height: 750px;
     }
     
     .info {
@@ -80,16 +80,31 @@
     }
 </style>
 
+<!--
+   framework css: GRID (dividir o site em colunas) (12 colunas)
+   
+   [1 colula branca] [sidebar: 2 colunas largura] [conteúdo: oito colunas] [1 coluna branca] 
 
+    col-md-X (largura coisa)
+    
+    col-md-1   col-md-2 col-md-8 col-md-1
+
+    col-sm-x
+    col-gd-x
+    col-xm-x
+
+-->
 
 <section class="row content">
     <div id='sidebar' class='col-md-offset-1 col-md-2 panel'>
         
         <div class="info">
-            <img class = "avagrupo" src="{{ gitlab_group_info.avatar_url }}"/>
+            {% if gitlab_group_info.avatar_url %}
+                <img class = "avagrupo" src="{{ gitlab_group_info.avatar_url }}"/>
+            {% endif %}
             <h1>{{ time.nome }}</h1>
-            <button class="btn btn-email" href="{{ time.email }}">
-                Contato
+            <button class="btn btn-email">
+                <a href="mailto:{{ time.email }}">Contato</a>
             </button>
             <p>{{ gitlab_groups_info.name }}</p>
         </div>
@@ -114,7 +129,10 @@
             <h2>Por aí</h2>
             <p>
                 <img class = "avamembros" src="http://www.freeiconspng.com/uploads/github-logo-icon-30.png"/> 
-                <a href="http://www.github.com">GitGud</a>
+                <a href="{{ time.github_link }}">GitGud</a></br>
+                <img class = "avamembros" src="https://lh3.googleusercontent.com/cyErEoQFP4PagUIp05cQtSngM03mpGV61wo3w4JwRbUM0AMs1btQ5zazvnjtSYXg7mM=w300"/> 
+                <a href="{{ time.slacker_link }}">Slacker</a>            
+    
             </p>
         </section>
         
@@ -137,7 +155,6 @@
             {% endfor %}
         </ul>
         
-        <h1>Milestones</h1>
-        {{ milestones }}
+
     </section>
 </section>
