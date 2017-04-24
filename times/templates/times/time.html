@@ -13,68 +13,68 @@
         padding: 0 0 0 0;
         min-height: 750px;
     }
-    
+
     .info {
         text-align: center;
     }
-    
+
     .avamembros {
         border-radius: 50%;
         height: 40px;
         width: 40px;
     }
-    
+
     .avagrupo {
         width: 90%;
         max-width: 200px;
     }
-    
+
     .btn-email {
         background-color: #7bbb5e;
         color: white;
     }
-    
+
     h2 {
         margin-top: 20px;
         font-size: 20px;
     }
-    
+
     .row.content {
         margin-top: 2%;
         height:100%;
         margin-bottom: 2%;
     }
-    
+
     .btn-skill {
         margin-right: 5px;
         margin-left: 5px;
         margin-top: 8px;
         background-color: rgb(220,220,220);
     }
-    
+
     button a {
         color: white !important;
     }
-    
+
     #sidebar section {
         padding-right: 15px;
         padding-left: 15px;
         border-bottom: 1px solid #eee;
         padding-bottom: 10px;
-        
-        
+
+
     }
-    
+
     #sidebar section:first-of-type {
         border-top: 1px solid #eee;
         margin-top: 10px;
     }
-    
+
     #projects li span {
         width: 48%;
         display: inline-block;
     }
-    
+
     #projects li span.buttons {
         text-align: right;
     }
@@ -82,11 +82,11 @@
 
 <!--
    framework css: GRID (dividir o site em colunas) (12 colunas)
-   
-   [1 colula branca] [sidebar: 2 colunas largura] [conteúdo: oito colunas] [1 coluna branca] 
+
+   [1 colula branca] [sidebar: 2 colunas largura] [conteúdo: oito colunas] [1 coluna branca]
 
     col-md-X (largura coisa)
-    
+
     col-md-1   col-md-2 col-md-8 col-md-1
 
     col-sm-x
@@ -97,7 +97,7 @@
 
 <section class="row content">
     <div id='sidebar' class='col-md-offset-1 col-md-2 panel'>
-        
+
         <div class="info">
             {% if gitlab_group_info.avatar_url %}
                 <img class = "avagrupo" src="{{ gitlab_group_info.avatar_url }}"/>
@@ -108,14 +108,14 @@
             </button>
             <p>{{ gitlab_groups_info.name }}</p>
         </div>
-        
+
         <section id="members">
             <h2>Membros</h2>
             {% for member in gitlab_members %}
                 <img class = "avamembros" src="{{ member.avatar_url}}" />
             {% endfor %}
         </section>
-        
+
         <section id="skills">
             <h2>Habilidades</h2>
             <p>
@@ -124,19 +124,19 @@
                 {% endfor %}
             </p>
         </section>
-        
+
         <section id="elsewhere">
             <h2>Por aí</h2>
             <p>
-                <img class = "avamembros" src="http://www.freeiconspng.com/uploads/github-logo-icon-30.png"/> 
+                <img class = "avamembros" src="http://www.freeiconspng.com/uploads/github-logo-icon-30.png"/>
                 <a href="{{ time.github_link }}">GitGud</a></br>
-                <img class = "avamembros" src="https://lh3.googleusercontent.com/cyErEoQFP4PagUIp05cQtSngM03mpGV61wo3w4JwRbUM0AMs1btQ5zazvnjtSYXg7mM=w300"/> 
-                <a href="{{ time.slacker_link }}">Slacker</a>            
-    
+                <img class = "avamembros" src="https://upload.wikimedia.org/wikipedia/commons/7/76/Slack_Icon.png"/> 
+                <a href="{{ time.slack_link }}">Slacker</a>
+
             </p>
         </section>
-        
-        
+
+
     </div>
     <section id='content' class='col-md-8'>
         <ul id='projects' class='list-group'>
@@ -148,13 +148,13 @@
                     <span class='buttons'>
                         <button class="btn btn-primary"><a href="{{ project.web_url }}">Repositório</a></button>
                         <button class="btn btn-warning"><a href="github-windows://{{ project.ssh_url_to_repo }}">Clonar</a></button>
-                        
+
                         <button class="btn btn-danger">Tickets ({{project.open_issues_count}})</button>
                     </span>
                 </li>
             {% endfor %}
         </ul>
-        
+
 
     </section>
 </section>

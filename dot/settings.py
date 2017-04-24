@@ -25,7 +25,7 @@ SECRET_KEY = '5l)*y*bl*23=_q-s5hi@zon7o1nc6hm-a8jh6j=w$@tu1$^3bc'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["pythonbunny-memuller.c9users.io"]
+ALLOWED_HOSTS = ["127.0.0.1"]
 
 
 # Application definition

@@ -40,14 +40,14 @@ class TimeView(TemplateView):
         if not "//" in team.github_link:
             team.github_link = "http://" + team.github_link
 
-        if not "//" in team.slacker_link:
-            team.slacker_link = "http://" + team.slacker_link
+        if not "//" in team.slack_link:
+            team.slack_link = "http://" + team.slack_link
 
 
         context['time'] = team
 
 
-        gl = gitlab.Gitlab('http://gitlab.com', 'cHCit8sbsWE1DjmkKetz')
+        gl = gitlab.Gitlab('https://gitlab.globoi.com', 'UkBg-eo-VeigLX6LSsrt')
         gl.auth()
 
 
@@ -56,7 +56,7 @@ class TimeView(TemplateView):
         group = False
 
         if len(groups) == 0:
-            raise Exception("Troca os nomes do grupo aaaaaaaaaa")
+            raise Exception("Pesquisa não encontrou nenhum time com o nome")
 
         else:
             for i in range(0, len(groups), 1):
@@ -66,7 +66,7 @@ class TimeView(TemplateView):
 
 
         if group == False :
-            raise Exception("Troca os nomes do grupo")
+            raise Exception("Caiu no for mas não encontrou link de projeto igual")
 
         member = group.members.list()
         project = group.projects.list()
